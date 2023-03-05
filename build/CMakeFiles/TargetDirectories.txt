@@ -1,3 +1,0 @@
-C:/Users/rohan/Desktop/OS/kluster-os/build/CMakeFiles/bootloader.bin.dir
-C:/Users/rohan/Desktop/OS/kluster-os/build/CMakeFiles/edit_cache.dir
-C:/Users/rohan/Desktop/OS/kluster-os/build/CMakeFiles/rebuild_cache.dir

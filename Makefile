@@ -1,5 +1,6 @@
 # Make file replace with cmake later for better compile time
 
+
 all: bootloader.asm boot.bin
 
 bootloader.asm:
