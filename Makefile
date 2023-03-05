@@ -1,5 +1,5 @@
 # Make file replace with cmake later for better compile time
-
+# add qcow2 file conv check
 CCFLAGS = -m64 -nostdlib -fno-rtti -fno-builtin -fno-exceptions -fno-leading-underscore
 
 BOOTSECT=bootloader.bin
