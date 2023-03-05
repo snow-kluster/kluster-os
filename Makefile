@@ -7,7 +7,7 @@ BOOTSECT=bootloader.bin
 all: bootloader.asm kluster.qcow2 boot.bin iso 
 
 bootloader.asm:
-	nasm -f bin src/bootloader.asm -o build/bootloader.bin
+	nasm -f bin src/bootloader.asm -o build/bootloader.bin -I base/
 
 boot.bin:
 	qemu-system-x86_64 -drive file=build/bootloader.bin,format=raw

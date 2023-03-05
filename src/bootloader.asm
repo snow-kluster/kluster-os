@@ -1,9 +1,12 @@
 ; bootsector
 [bits 16] 		; use 16 bits
 [org 0x7c00] 		; sets the start address for bootloader
+KERNEL_LOCATION equ 0x7ef0
 
 ; bootloader check for last to bytes to confirm bootsector
 ; 0x55 0xaa are the key signatures present at the end of the bootsector
+
+%include "../base/disk_load.asm"
 
 mov [BOOT_DRIVE], dl ; BIOS stores our boot drive in DL , so it ’s
 ; best to remember this for later.
@@ -13,14 +16,12 @@ mov bx, 0 x9000 ; Load 5 sectors to 0 x0000 (ES ):0 x9000 (BX)
 mov dh, 5 ; from the boot disk.
 mov dl, [ BOOT_DRIVE ]
 call disk_load
-mov dx, [0 x9000 ] ; Print out the first loaded word , which
+mov dx, [0 x9000] ; Print out the first loaded word , which
 call print_hex ; we expect to be 0xdada , stored
 ; at address 0 x9000
 mov dx, [0 x9000 + 512] ; Also , print the first word from the
 call print_hex ; 2nd loaded sector : should be 0 xface
 jmp $
-
-%include "../../include/base/disk_load.asm"
 
 start:
 	mov si, msg 	; load the address of msg into si register
