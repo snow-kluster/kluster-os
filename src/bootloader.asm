@@ -23,6 +23,8 @@ mov dx, [0 x9000 + 512] ; Also , print the first word from the
 call print_hex ; 2nd loaded sector : should be 0 xface
 jmp $
 
+
+
 start:
 	mov si, msg 	; load the address of msg into si register
 	mov ah, 0x0e 	; sets ah to 0xe (function teletype)
