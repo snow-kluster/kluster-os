@@ -9,3 +9,4 @@ build/build.ninja
 .exe
 .dll
 .out
+.exe
