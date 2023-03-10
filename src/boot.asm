@@ -52,22 +52,36 @@ dw 0xAA55
 bootsector_extended:
 begin_protected:
 
+[bits 32]
+
 ; Clear vga memory output
 call clear_protected
+
+call detect_lm_protected
 
 ; Test VGA-style print function
 mov esi, protected_alert
 call print_protected
+
+call init_pt_protected
+
+call elevate_protected
 
 jmp $       ; Infinite Loop
 
 ; INCLUDE protected-mode functions
 %include "../include/protect/clear.asm"
 %include "../include/protect/print.asm"
+%include "../include/protect/init.asm"
+%include "../include/protect/detect.asm"
+%include "../include/protect/gdt.asm"
+%include "../include/protect/elevate.asm"
+
 
 ; Define necessary constants
 vga_start:                  equ 0x000B8000
 vga_extent:                 equ 80 * 25 * 2             ; VGA Memory is 80 chars wide by 25 chars tall (one char is 2 bytes)
+kernel_start:               equ 0x00100000              ; Kernel is at 1MB
 style_wb:                   equ 0x0F
 
 ; Define messages
@@ -75,3 +89,24 @@ protected_alert:                 db `Now in 32-bit protected mode`, 0
 
 ; Fill with zeros to the end of the sector
 times 512 - ($ - bootsector_extended) db 0x00
+
+begin_long_mode:
+
+[bits 64]
+
+mov rdi, style_blue
+call clear_long
+
+mov rdi, style_blue
+mov rsi, long_mode_note
+call print_long
+
+jmp $
+
+%include "../include/long/clear.asm"
+%include "../include/long/print.asm"
+
+long_mode_note:                      db `Now running in fully-enabled, 64-bit long mode!`, 0
+style_blue:                     equ 0x1F
+
+times 512 - ($ - begin_long_mode) db 0x00
