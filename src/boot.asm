@@ -89,7 +89,6 @@ protected_alert:                 db `Now in 32-bit protected mode`, 0
 
 ; Fill with zeros to the end of the sector
 times 512 - ($ - bootsector_extended) db 0x00
-
 begin_long_mode:
 
 [bits 64]
@@ -110,3 +109,4 @@ long_mode_note:                      db `Now running in fully-enabled, 64-bit lo
 style_blue:                     equ 0x1F
 
 times 512 - ($ - begin_long_mode) db 0x00
+
