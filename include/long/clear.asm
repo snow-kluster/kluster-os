@@ -22,4 +22,5 @@ clear_long:
     ret
 
 
-space_char:                     equ ` `
+space_char:
+equ ' '
