@@ -4,7 +4,7 @@ CCFLAGS = -m64 -nostdlib -fno-rtti -fno-builtin -fno-exceptions -fno-leading-und
 
 BOOTSECT=boot.bin
 
-all: bootloader.asm kluster.qcow2 boot.bin iso 
+all: bootloader.asm kluster.qcow2 boot.bin
 
 bootloader.asm:
 	nasm -f bin src/boot.asm -o build/boot.bin -I base/
